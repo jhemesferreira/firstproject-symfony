@@ -1,7 +1,8 @@
 <?php namespace App\Controller;
 
-use App\Entity\Property;
 use App\Repository\PropertyRepository;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,11 +10,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PropertyController extends AbstractController
 {   
+    /**
+     * @var PropertyRepository
+     */
     private $repository;
 
-    public function __construct(PropertyRepository $repository)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    public function __construct(PropertyRepository $repository, EntityManagerInterface $em)
     {
       $this->repository = $repository;
+      $this->em = $em;
     }
 
     /**
@@ -45,10 +55,17 @@ class PropertyController extends AbstractController
       // dump($repository);
 
       // ou
-      dump($this->repository);
-
+      // dump($this->repository);
+      // dump($this->repository->findOneBy(['floor'=>1]));
+      $property = $this->repository->findAllVisible();
+      dump($property);
+      $property[0]->setSold(true);
+      $this->em->flush();
+      dump($property);
+   
       return $this->render('pages/property/index.html.twig', [
           'current_menu' => 'property'
       ]);
     }
+
 }
