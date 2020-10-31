@@ -29,7 +29,7 @@ class AdminPropertyController extends AbstractController
     {
         $properties = $this->repository->findAll();
         
-        return $this->render('admin/property/index.html.twig',[
+        return $this->render('Admin/property/index.html.twig',[
             'properties'=>$properties
         ]);
     }
@@ -40,7 +40,7 @@ class AdminPropertyController extends AbstractController
     public function edit(Property $property): Response
     {
         $form = $this->createForm(PropertyType::class, $property);
-        return $this->render('admin/property/edit.html.twig', [
+        return $this->render('Admin/property/edit.html.twig', [
             'property'=>$property,
             'form'=>$form->createView()
         ]);
