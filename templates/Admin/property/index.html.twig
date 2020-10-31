@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
-
 {% block title 'Admin' %}
+
 {% block content %}
 	<div class="container">
 		<h1>Gerer les biens</h1>
@@ -11,6 +11,10 @@
 			<thead>
 				<tr>
 					<th scope="col">Titre</th>
+					<th scope="col">Description</th>
+					<th scope="col">Surface</th>
+					<th scope="col">Rooms</th>
+					<th scope="col">Prix</th>
 					<th scope="col">Actions</th>
 				</tr>
 			</thead>
@@ -18,6 +22,10 @@
 				{% for property in properties %}
 					<tr>
 						<th scope="row">{{ property.title }}</th>
+						<th scope="row">{{ property.description }}</th>
+						<th scope="row">{{ property.surface }}</th>
+						<th scope="row">{{ property.rooms }}</th>
+						<th scope="row">{{ property.price }}</th>
 						<td>
 							<a href="{{ path('admin.property.edit', {id: property.id}) }}">Editer</a>
 						</td>
