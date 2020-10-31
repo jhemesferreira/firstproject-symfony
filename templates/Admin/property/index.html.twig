@@ -4,7 +4,11 @@
 {% block content %}
 	<div class="container">
 		<h1>Gerer les biens</h1>
-		<p>Laborum proident pariatur eu proident pariatur eiusmod.</p>
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{	message	}}
+			</div>
+		{% endfor %}
 	</div>
 	<div class="container">
 		<table class="table">
@@ -26,12 +30,51 @@
 						<th scope="row">{{ property.surface }}</th>
 						<th scope="row">{{ property.rooms }}</th>
 						<th scope="row">{{ property.price }}</th>
-						<td>
-							<a href="{{ path('admin.property.edit', {id: property.id}) }}">Editer</a>
-						</td>
+						<td style="display: flex; justify-content: flex-end;">
+							<a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-secondary">Editer</a>
+							{# <form method="POST" action="{{ path('admin.property.delete', {id: property.id} ) }}" 
+								class ="ml-2" onsubmit="return confirm('Etes-vous sur de vouloir supprimer ce bien?')">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{	csrf_token('delete' ~ property.id) 	}}">
+								<button class="btn btn-danger">Supprimer</button>
+							</form> #}
+							
+							<button type="button" class="btn btn-danger ml-1" data-toggle="modal" data-target="#modal{{ property.id }}">
+								Supprimer
+							</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="modal{{ property.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											Etes-vous sur de vouloir supprimer "{{ property.title }}"? 
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<form method="POST" action="{{ path('admin.property.delete', { id: property.id} ) }}" class="ml-2">
+												<input type="hidden" name="_method" value="DELETE">
+												<input type="hidden" name="_token" value="{{	csrf_token('delete' ~ property.id) 	}}">
+												<button type="submit" class="btn btn-danger">Confirmer</button>
+											</form>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>	
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
+		<div class="text-right">
+			<a class="btn btn-primary" href="{{ path('admin.property.new') }}">Creer</a>
+		</div>
 	</div>
 {% endblock %}
