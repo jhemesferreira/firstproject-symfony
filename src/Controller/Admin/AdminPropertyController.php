@@ -51,6 +51,7 @@ class AdminPropertyController extends AbstractController
 		if($form->isSubmitted() && $form->isValid()){
 			$this->em->persist($property);
 			$this->em->flush();
+			$this->addFlash('success', 'Le bien a été créé avec succès');
 			return $this->redirectToRoute('admin.property.index');
 		}
 
@@ -71,7 +72,7 @@ class AdminPropertyController extends AbstractController
 
 		if($form->isSubmitted() && $form->isValid()){
 			$this->em->flush();
-			$this->addFlash('success', 'Bien modifié avec sucès');
+			$this->addFlash('success', 'Le bien a été modifié avec succès');
 			return $this->redirectToRoute('admin.property.index');
 		}
         return $this->render('Admin/property/edit.html.twig', [
@@ -90,8 +91,7 @@ class AdminPropertyController extends AbstractController
 		if($this->isCsrfTokenValid('delete' . $property->getId(), $token)){
 			$this->em->remove($property);
 			$this->em->flush();
-			// dump('Suppression');
-			// return new Response('Suppression');
+			$this->addFlash('success', 'Le bien a été supprimé avec succès');
 		}
 		
 		return $this->redirectToRoute('admin.property.index');
