@@ -3,6 +3,11 @@
 {% block content %}
 <div class="container">
 	<h1>Creer un bien</h1>
+	{# {% for error in errors %}
+		<div class="alert alert-danger" role="alert">
+			{{ error.message }}
+		</div>
+	{% endfor %} #}
 	{{include ('Admin/property/_form.html.twig' , {form: form, button: 'Creer'}) }}
 </div>
 

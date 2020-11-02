@@ -3,6 +3,7 @@
 
 {% block content %}
 	<div class="container">
+		<a href="{{ path('app_logout') }}">se déconnecter</a>
 		<h1>Gerer les biens</h1>
 		{% for message in app.flashes('success') %}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">

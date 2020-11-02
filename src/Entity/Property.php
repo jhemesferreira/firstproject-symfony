@@ -28,7 +28,7 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
-	 * @Assert\Length(min=2, max=15)
+     * 
      */
     private $title;
 

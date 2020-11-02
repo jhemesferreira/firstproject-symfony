@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminPropertyController extends AbstractController
@@ -19,10 +20,11 @@ class AdminPropertyController extends AbstractController
      */
     private $repository; 
 
-    public function __construct(PropertyRepository $repository, EntityManagerInterface $em)
+    public function __construct(PropertyRepository $repository, EntityManagerInterface $em, ValidatorInterface $validator)
     {
 		$this->repository = $repository;
 		$this->em = $em;
+		$this->validator = $validator;
     }
 
     /**
@@ -45,8 +47,14 @@ class AdminPropertyController extends AbstractController
 	{
 		$property = new Property();
 
+		// $errors = $this->validator->validate($property);
+		
 		$form = $this->createForm(PropertyType::class, $property);
 		$form->handleRequest($request);
+
+		
+
+		
 
 		if($form->isSubmitted() && $form->isValid()){
 			$this->em->persist($property);
