@@ -2,8 +2,17 @@
 
 {% block title 'Voir les biens' %}
 {% block content %}
+	<h1>Acheter</h1>
 	<div class="container">
-		<h1>Acheter</h1>
-		<p>Laborum proident pariatur eu proident pariatur eiusmod.</p>
+		<div class="row">
+			{% for property in properties %}
+			<div class="col-md-4">
+				{{ include('pages/property/_property.html.twig', {property: property})}}
+			</div>
+			{% endfor %}
+		</div>
+		<div class="navigation">
+			{{ knp_pagination_render(properties) }}
+		</div>
 	</div>
 {% endblock %}

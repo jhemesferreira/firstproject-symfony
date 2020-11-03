@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface,  \Serializable
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -116,30 +116,30 @@ class User implements UserInterface,  \Serializable
         // $this->plainPassword = null;
 	}
 	
-	 /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
-    {
+	//  /**
+    //  * @see \Serializable::serialize()
+    //  */
+    // public function serialize()
+    // {
 		
-        return serialize(
-            [
-				$this->id,
-				$this->email,
-                $this->password,
-            ]
-        );
-    }
+    //     return serialize(
+    //         [
+	// 			// $this->id,
+	// 			$this->email,
+    //             $this->password,
+    //         ]
+    //     );
+    // }
 
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
-    {
-        list(
-			$this->id,
-			$this->email,
-            $this->password,
-            ) = unserialize($serialized, ['allowed_classes' => false]);
-    }
+    // /**
+    //  * @see \Serializable::unserialize()
+    //  */
+    // public function unserialize($serialized)
+    // {
+    //     list(
+	// 		// $this->id,
+	// 		$this->email,
+    //         $this->password,
+    //         ) = unserialize($serialized, ['allowed_classes' => false]);
+    // }
 }
