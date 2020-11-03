@@ -13,6 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+/**
+ * @Route("/admin/property")
+ */
 class AdminPropertyController extends AbstractController
 {
     /**
@@ -28,7 +32,7 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="admin.property.index")
+     * @Route("/", name="admin.property.index")
      * 
     */
     public function index(): Response
@@ -36,12 +40,13 @@ class AdminPropertyController extends AbstractController
         $properties = $this->repository->findAll();
         
         return $this->render('Admin/property/index.html.twig',[
-            'properties'=>$properties
+			'properties'=>$properties,
+			'current_menu' => 'property'
         ]);
 	}
 	
 	/**
-	 * @Route("admin/property/create", name="admin.property.new")
+	 * @Route("/property/new", name="admin.property.new")
 	 */
 	public function new(Request $request): Response
 	{
@@ -71,7 +76,7 @@ class AdminPropertyController extends AbstractController
 	}
 
     /**
-     * @Route("/admin/property/{id}", name="admin.property.edit", methods="GET|POST")
+     * @Route("/property/{id}", name="admin.property.edit", methods="GET|POST")
      */
     public function edit(Property $property, Request $request): Response
     {
@@ -91,7 +96,7 @@ class AdminPropertyController extends AbstractController
 
 	
 	/**
-	 * @Route("/admin/property/{id}", name="admin.property.delete", methods="DELETE")
+	 * @Route("/property/{id}", name="admin.property.delete", methods="DELETE")
 	 */
 	public function delete(Property $property, Request $request): Response
 	{

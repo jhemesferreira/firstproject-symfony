@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class PropertySearch{
@@ -17,6 +18,15 @@ class PropertySearch{
 	 */
 	private $minSurface; 
 
+	/**
+	 * @var ArrayCollection
+	 */
+	private $options; 
+
+	public function __construct()
+	{
+		$this->options = new ArrayCollection();
+	}
 
 	public function getMaxPrice(): ?int
 	{
@@ -37,6 +47,17 @@ class PropertySearch{
 	public function setMinSurface(int $minSurface)
 	{
 		$this->minSurface = $minSurface;
+		return $this;
+	}
+
+	public function getOptions(): ?ArrayCollection
+	{
+		return $this->options;
+	}
+
+	public function setOptions(ArrayCollection $options)
+	{
+		$this->options = $options;
 		return $this;
 	}
 }
