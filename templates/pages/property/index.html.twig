@@ -2,8 +2,30 @@
 
 {% block title 'Voir les biens' %}
 {% block content %}
-	<h1>Acheter</h1>
+	<div class="container mt-5">
+		<div class="container jumbotron">
+			<div class="container-fluid">
+				{{ form_start(form) }}
+				<div class="form-row align-items-end">
+					<div class="col">
+						{{ form_row(form.maxPrice) }}
+					</div>
+					<div class="col">
+						{{ form_row(form.minSurface) }}
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<button class="btn btn-primary">Recherche</button>	
+						</div>
+					</div>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+	
 	<div class="container">
+		<h1>Voir tous les biens</h1>
 		<div class="row">
 			{% for property in properties %}
 			<div class="col-md-4">
@@ -11,8 +33,11 @@
 			</div>
 			{% endfor %}
 		</div>
-		<div class="navigation">
-			{{ knp_pagination_render(properties) }}
+		<div class="container">
+			<div class="navigation">
+				{{ knp_pagination_render(properties) }}
+			</div>
 		</div>
+		
 	</div>
 {% endblock %}

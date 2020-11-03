@@ -14,6 +14,7 @@
 				<a href="{{path('property.show', {id: p.id, slug: p.slug})}}">{{	p.title	}}</a>
 			</h5>
 			<p>{{ p.description }}</p>
+			<p>{{ p.surface }}</p>
 			<p>{{ p.formattedPrice }}€</p>
 		{% endfor %}
 
